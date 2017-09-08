@@ -8,7 +8,7 @@ MAINTAINER  Yvonnick Esnault <yvonnick@esnau.lt>
 ENV DEBIAN_FRONTEND=noninteractive DEBCONF_NONINTERACTIVE_SEEN=true
 
 # TODO: review this dependency list
-RUN     apt-get clean && apt-get update && apt-get install -y \
+RUN      apt-get update && apt-get install -y \
 	        git \
             apache2 \
             curl \
@@ -31,7 +31,7 @@ RUN     apt-get clean && apt-get update && apt-get install -y \
             tar \
             unzip \
             sudo \
-        && apt-get clean && rm -rf /var/lib/apt/lists/*
+        && apt-get clean 
 
 # For some reason phabricator doesn't have tagged releases. To support
 # repeatable builds use the latest SHA
