@@ -65,7 +65,7 @@ RUN     /opt/phabricator/bin/config set phd.user "root"
 RUN     echo "www-data ALL=(ALL) SETENV: NOPASSWD: /opt/phabricator/support/bin/git-http-backend" >> /etc/sudoers
 
 # Setup cas provider
-ADD     download.sh /opt/download.sh
+ADD     download-cas.sh /opt/download-cas.sh
 WORKDIR /opt
 RUN     bash download-cas.sh
 
