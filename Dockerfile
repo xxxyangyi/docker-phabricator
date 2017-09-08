@@ -29,6 +29,7 @@ RUN     apt-get clean && apt-get update && apt-get install -y \
             sendmail \
             subversion \
             tar \
+            unzip \
             sudo \
         && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -62,6 +63,15 @@ RUN     sed -e 's/post_max_size =.*/post_max_size = 32M/' \
 RUN     ln -s /usr/lib/git-core/git-http-backend /opt/phabricator/support/bin
 RUN     /opt/phabricator/bin/config set phd.user "root"
 RUN     echo "www-data ALL=(ALL) SETENV: NOPASSWD: /opt/phabricator/support/bin/git-http-backend" >> /etc/sudoers
+
+# Setup cas provider
+ADD     download.sh /opt/download.sh
+WORKDIR /opt
+RUN     bash download-cas.sh
+
+
+
+
 
 EXPOSE  80
 ADD     entrypoint.sh /entrypoint.sh
